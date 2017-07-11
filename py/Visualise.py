@@ -1,26 +1,19 @@
 import random
 
-# Your random function
-def rngfunc():
+
+def rng_function():
+    # Your random function
     value = int(random.triangular(0, 9, 1))
     return value
 
 
 def iterate(x=10000):
-    response = {}
-    array = []
+    response = {"raw": [], "counts": {}, "percents": {}}
     for i in range(0, x):
-        array.append(rngfunc())
-    response["raw"] = array
-
-    counts = {}
-    percent = {}
-    for item in array:
-        counts[item] = array.count(item)
-        percent[item] = str(counts[item]/(x/100)) + "%"
-    response["counts"] = counts
-    response["percents"] = percent
-
+        rng = rng_function()
+        response["raw"].append(rng)
+        response["counts"][rng] = response["raw"].count(rng)
+        response["percents"][rng] = str(response["counts"][rng] / (x / 100)) + "%"
     return response
 
 
@@ -29,10 +22,7 @@ def visualise():
     x = 10000
     response = iterate(x)
     for index, item in response["percents"].items():
-        temp = int(round(float(item.strip('%'))))
-        stars = ""
-        for i in range(0, temp):
-            stars = stars + "*"
+        stars = "*" * round(float(item.strip('%')))
         print(str(index) + " : " + stars + " : " + str(response["counts"][index]) + " (" + item + ")")
 
 

@@ -21,7 +21,7 @@ Example output
 Modify you random function 
 ```
 # Your random function
-def rngfunc():
+def rng_function():
     value = int(random.triangular(0, 9, 1))
     return value
 ```
